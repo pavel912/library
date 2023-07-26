@@ -1,11 +1,9 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
-    id 'jacoco'
 }
 
-group 'pavel.library'
+group 'pavel912.library'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -13,7 +11,7 @@ repositories {
 }
 
 application {
-    mainClass = 'pavel.library.AppApplication'
+    mainClass = 'pavel912.library.AppApplication'
 }
 
 dependencies {
@@ -24,15 +22,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-task stage(dependsOn: ['clean', 'installDist'])
-installDist.mustRunAfter clean
-
-jacocoTestReport {
-    reports {
-        xml.required = true
-    }
-    dependsOn test
-}
-
-jacocoTestReport.dependsOn test

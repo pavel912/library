@@ -1,4 +1,4 @@
-package pavel.library;
+package pavel912.library;
 
 public class AppApplication {
     public static void main(String[] args) {
