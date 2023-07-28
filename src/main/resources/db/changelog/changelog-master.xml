@@ -1,2 +1,271 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"/>
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="lob55 (generated)" id="1690551792025-1">
+        <createTable tableName="book_exemplars">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_exemplarsPK"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="book_id" type="BIGINT"/>
+            <column name="book_status_id" type="BIGINT"/>
+            <column name="cell_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-2">
+        <createTable tableName="book_exemplars_orders">
+            <column name="book_exemplar_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orders_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-3">
+        <createTable tableName="book_statuses">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_statusesPK"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-4">
+        <createTable tableName="book_statuses_book_exemplars">
+            <column name="book_status_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_exemplars_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-5">
+        <createTable tableName="books">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="booksPK"/>
+            </column>
+            <column name="author" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="description" type="CLOB"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="picture_ref" type="VARCHAR(255)"/>
+            <column name="price" type="DOUBLE"/>
+            <column name="publisher" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-6">
+        <createTable tableName="books_book_exemplars">
+            <column name="book_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exemplars_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-7">
+        <createTable tableName="cells">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="cellsPK"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="book_exemplar_id" type="BIGINT"/>
+            <column name="shelf_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-8">
+        <createTable tableName="libraries">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="librariesPK"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-9">
+        <createTable tableName="libraries_shelfs">
+            <column name="library_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shelfs_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-10">
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ordersPK"/>
+            </column>
+            <column name="actual_fee" type="DOUBLE"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="finished_at" type="TIMESTAMP"/>
+            <column name="planned_fee" type="DOUBLE"/>
+            <column name="planned_finished_at" type="TIMESTAMP"/>
+            <column name="started_at" type="TIMESTAMP"/>
+            <column name="book_exemplar_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-11">
+        <createTable tableName="shelfs">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="shelfsPK"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="library_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-12">
+        <createTable tableName="shelfs_cells">
+            <column name="shelf_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cells_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-13">
+        <createTable tableName="user_roles">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_rolesPK"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-14">
+        <createTable tableName="user_roles_users">
+            <column name="user_role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="users_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-15">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="date_of_birth" type="TIMESTAMP"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="passport_ref" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="user_role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-16">
+        <createTable tableName="users_orders">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orders_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-17">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-18">
+        <addUniqueConstraint columnNames="orders_id" constraintName="UK_1njdfitph68mh7p7c6f3qc736" tableName="users_orders"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-19">
+        <addUniqueConstraint columnNames="shelfs_id" constraintName="UK_61f2508f94ypumnc3a1tbp6ni" tableName="libraries_shelfs"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-20">
+        <addUniqueConstraint columnNames="exemplars_id" constraintName="UK_9c51cqyh6oubegy3r2mh25ljd" tableName="books_book_exemplars"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-21">
+        <addUniqueConstraint columnNames="cells_id" constraintName="UK_f3w9nagw816c16w24g3lkdbj6" tableName="shelfs_cells"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-22">
+        <addUniqueConstraint columnNames="book_exemplars_id" constraintName="UK_jtcxnorietgex0nermwocqhw7" tableName="book_statuses_book_exemplars"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-23">
+        <addUniqueConstraint columnNames="users_id" constraintName="UK_mmlm39rhdsxro1lg914i0xh1t" tableName="user_roles_users"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-24">
+        <addUniqueConstraint columnNames="orders_id" constraintName="UK_oajxlu58og6nkqetk4xadtty6" tableName="book_exemplars_orders"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-25">
+        <addForeignKeyConstraint baseColumnNames="orders_id" baseTableName="users_orders" constraintName="FK2lnf5jw8p8q0ytkr8dp0mlx6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-26">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="orders" constraintName="FK32ql8ubntj5uh44ph9659tiih" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-27">
+        <addForeignKeyConstraint baseColumnNames="library_id" baseTableName="libraries_shelfs" constraintName="FK5kfkuq993krjd1bq6yr7v2ik8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="libraries" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-28">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book_exemplars" constraintName="FK6b4vxmcapxlr1i1k8ggvqq4i9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="books" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-29">
+        <addForeignKeyConstraint baseColumnNames="book_status_id" baseTableName="book_statuses_book_exemplars" constraintName="FK86avxmk6mkt0p94yj4yu4x5vk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_statuses" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-30">
+        <addForeignKeyConstraint baseColumnNames="cell_id" baseTableName="book_exemplars" constraintName="FK8o37mssrxhp0r4gr6t26n7ucd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cells" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-31">
+        <addForeignKeyConstraint baseColumnNames="user_role_id" baseTableName="user_roles_users" constraintName="FKaa324ufa5d9jcxt9mvb8etkm7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_roles" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-32">
+        <addForeignKeyConstraint baseColumnNames="exemplars_id" baseTableName="books_book_exemplars" constraintName="FKaffc2btg1iveyx414arm1we0q" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_exemplars" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-33">
+        <addForeignKeyConstraint baseColumnNames="shelfs_id" baseTableName="libraries_shelfs" constraintName="FKct7yotf6tdumkvakq7essgyy7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="shelfs" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-34">
+        <addForeignKeyConstraint baseColumnNames="shelf_id" baseTableName="shelfs_cells" constraintName="FKd3jc01ext6h02chnx18oe1mb8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="shelfs" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-35">
+        <addForeignKeyConstraint baseColumnNames="book_exemplar_id" baseTableName="cells" constraintName="FKe5tpjrhyqyg9gh3amx8uap60u" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_exemplars" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-36">
+        <addForeignKeyConstraint baseColumnNames="shelf_id" baseTableName="cells" constraintName="FKf3qn8xu19a21dfiq5nni4exk1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="shelfs" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-37">
+        <addForeignKeyConstraint baseColumnNames="book_exemplar_id" baseTableName="book_exemplars_orders" constraintName="FKgwfsca9i1fqs2o3n8wm5a04ak" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_exemplars" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-38">
+        <addForeignKeyConstraint baseColumnNames="book_status_id" baseTableName="book_exemplars" constraintName="FKkn97ikn8l43boc57g4i9vrtqa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_statuses" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-39">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_orders" constraintName="FKms88pdhtsiuuusjpeij73f6df" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-40">
+        <addForeignKeyConstraint baseColumnNames="orders_id" baseTableName="book_exemplars_orders" constraintName="FKn48ushbdpr6825ikx8k5nvttd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-41">
+        <addForeignKeyConstraint baseColumnNames="book_exemplars_id" baseTableName="book_statuses_book_exemplars" constraintName="FKodufxfsvb07mqogw4b6l9t5d0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_exemplars" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-42">
+        <addForeignKeyConstraint baseColumnNames="cells_id" baseTableName="shelfs_cells" constraintName="FKopdfs7yrdg9wl0w7knmdh0tsi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cells" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-43">
+        <addForeignKeyConstraint baseColumnNames="library_id" baseTableName="shelfs" constraintName="FKp9tongxwpufn9r5bsiho6a4g7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="libraries" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-44">
+        <addForeignKeyConstraint baseColumnNames="users_id" baseTableName="user_roles_users" constraintName="FKqs86gil2v5nkr0kfliknwtev" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-45">
+        <addForeignKeyConstraint baseColumnNames="book_exemplar_id" baseTableName="orders" constraintName="FKs9ie7eymk54npqdsx6w90xhc6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="book_exemplars" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-46">
+        <addForeignKeyConstraint baseColumnNames="user_role_id" baseTableName="users" constraintName="FKsy1luwgtc2qas77si4xlrkjtl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_roles" validate="true"/>
+    </changeSet>
+    <changeSet author="lob55 (generated)" id="1690551792025-47">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="books_book_exemplars" constraintName="FKtev8c6pivuvxacabm66wd9peg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="books" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

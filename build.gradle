@@ -32,6 +32,8 @@ dependencies {
             'org.springframework.data:spring-data-commons',
             'org.springdoc:springdoc-openapi-ui:1.5.12',
             'org.liquibase:liquibase-core:4.6.1',
+            'com.querydsl:querydsl-core:5.0.0',
+            'com.querydsl:querydsl-jpa:5.0.0'
     )
 
     liquibaseRuntime(
@@ -89,7 +91,7 @@ liquibase {
             url 'jdbc:h2:./libraryDb'
             username 'admin'
             password 'admin'
-            referenceUrl 'hibernate:spring:hexlet.code.domain' +
+            referenceUrl 'hibernate:spring:pavel.library.domain' +
                     '?dialect=org.hibernate.dialect.H2Dialect' +
                     '&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy'
         }
